@@ -4,8 +4,6 @@
 
 @section('content')
 
-@if ($existe != '[]')
-
 <!-- registrar mascota -->
 <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg">
     <h1 class="text-3xl text-center font-bold">Registra tu mascota</h1>
@@ -32,9 +30,5 @@
     </form>
 </div>
 <!--fin registrar mascota -->
-@else
-    <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">Este collar ya se encuentra registrado o no existe</p>    
-@endif
-
 
 @endsection
