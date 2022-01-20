@@ -20,7 +20,7 @@ Route::get('/login', [SessionController::class, 'create'])
     ->name('login.index');
 
 Route::get('/register', [RegisterController::class, 'create'])
-    ->middleware('guest')
+    ->middleware('guest') 
     ->name('register.index'); 
 
 Route::post('/register', [RegisterController::class, 'store'])
@@ -46,5 +46,9 @@ Route::resource('veterinario',HistclinicoController::class);
 
 
 //generar key 
-
 Route::get('/generarkey',[KeysController::class, 'generarKey' ])->middleware('auth');
+
+//escanear qr 
+Route::get('escaner', function (){
+    return view('escanerqr.escaner'); 
+})->name('escanerqr');

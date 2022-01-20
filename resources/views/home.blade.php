@@ -4,6 +4,11 @@
     
 @section('content')
 
-    <h1 class="text-5xl text-center pt-24">Hola mundo</h1>
+<a href="{{ route('escanerqr')}}">
+        <button class="bg-green-500 text-white px-3 py-1 rounded-sm">
+            <h3 class="p-3 m-auto">Escanear QR</h3>
+        </button>
+    </a>
+
 
 @endsection
