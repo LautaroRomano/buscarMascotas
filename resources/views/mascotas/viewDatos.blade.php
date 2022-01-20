@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
-@section('title','Editar Mascota')
+@section('title','Ver mascota')
 
 @section('content')
 
-<!-- ver mascota --> 
+
+<!-- ver mascota -->
 <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg">
 
         <label for=""><b class="decoration-black">Datos de la mascota</b></label>
@@ -35,3 +36,4 @@
 <!--fin ver mascota -->
 
 @endsection
+

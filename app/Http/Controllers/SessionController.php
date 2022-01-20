@@ -15,7 +15,7 @@ class SessionController extends Controller
         if(auth()->attempt(request(['email','password'])) == false){
             return back()->withErrors(['message'=>'email o password incorrectos']);
         }
-        return redirect()->to('/');
+        return redirect()->to('');
     }
 
     public function destroy(){

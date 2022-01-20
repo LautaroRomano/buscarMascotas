@@ -13,7 +13,11 @@ class KeysController extends Controller
     {
 
         if (key::where('estado', '=', 1)->where('key', '=', $key)->whereNull('User_id')->exists()) {
-            return view('mascotas.create')->with('key', $key);
+            if(auth()->check()){
+                return view('mascotas.create')->with('key', $key);
+            }else{
+                return view('auth.login');
+            }
         }
 
         if (DB::table('mascotas')->where('key', $key)->exists()) {
