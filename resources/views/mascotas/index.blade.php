@@ -62,7 +62,7 @@
                     </a>
                     <a href="{{ route('vermascota', $row->key)}}">
                         <button class="bg-green-500 text-white px-3 py-1 rounded-sm">
-                            Ver
+                        <i class="fas fa-eye"></i>
                         </button>
                     </a>
                 </td>

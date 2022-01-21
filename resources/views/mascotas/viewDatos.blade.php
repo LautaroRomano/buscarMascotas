@@ -4,34 +4,33 @@
 
 @section('content')
 <!-- ver mascota -->
-<div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg">
+<div class="backgr" style="background-image: linear-gradient(to bottom, rgba(18,42, 66, .65), rgba(18,42, 66, .65)), url( {{ $mascota->fotourl }} )">
+        <div class="vm-container">
+                <label for="" class="vm-title"><b class="vm-title">Nombre: {{ $mascota->name}}</b></label>
+                <br>
+                <img src="{{$mascota->fotourl}}" class="vm-img">
+                <br>
+                <div class="grid grid-cols-2 gap-2 grid-custom">
 
-        <label for="" class="block mx-auto ta-center"><b class="decoration-black">Datos de la mascota</b></label>
-        <br>
-        <img src="{{$mascota->fotourl}}" class="bg-green-500 px-1 py-1 rounded-sm">
-        <br>
-        <label for="">Nombre: <b class="decoration-black">{{ $mascota->name}}</b></label>
-        <br>
-        <label for="">Su casa: <b class="decoration-black">{{ $mascota->calleynum}}</b></label>
-        <br>
-        <label for="">enfermedades: <b class="decoration-black">{{ $mascota->enfermedades}}</b></label>
-        <br>
-        <label for="">medicamentos: <b class="decoration-black">{{ $mascota->medicamentos}}</b></label>
-        <br>
-        <label for="">Fecha de nacimiento: <b class="decoration-black">{{ $mascota->fec_nac}}</b></label>
+                        <label for="" class="vm-datos">Su casa: <br><b class="mascota-item">{{ $mascota->calleynum}}</b></label>
 
-        <br>
-        <br>
-        <label for=""><b class="decoration-black">Datos del Dueño</b></label>
-        <br>
-        <label for="">Nombre: <b class="decoration-black">{{ $dueño->name}}</b></label>
-        <br>
-        <label for="">localidad: <b class="decoration-black">{{ $dueño->localidad}}</b></label>
-        <br>
-        <label for="">telefono: <b class="decoration-black">{{ $dueño->telefono}}</b></label>
-        <br>
+                        <label for="" class="vm-datos">enfermedades: <br><b class="">{{ $mascota->enfermedades}}</b></label>
 
+                        <label for="" class="vm-datos">medicamentos: <br><b class="">{{ $mascota->medicamentos}}</b></label>
 
+                        <label for="" class="vm-datos">Fecha de nacimiento: <br><b class="">{{ $mascota->fec_nac}}</b></label>
+                </div>
+                <label for="" class="vm-title"><b class="">Datos del Dueño</b></label>
+                <div class="grid grid-cols-2 gap-2 grid-custom">
+
+                        <label for="" class="vm-datos">Nombre: <br><b class="">{{ $dueño->name}}</b></label>
+
+                        <label for="" class="vm-datos">localidad: <br><b class="">{{ $dueño->localidad}}</b></label>
+
+                        <label for="" class="vm-datos">telefono: <br><b class="">{{ $dueño->telefono}}</b></label>
+
+                </div>
+        </div>
 </div>
 <!--fin ver mascota -->
 

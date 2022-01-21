@@ -2,3 +2,62 @@
     margin: auto;
     padding-top: 100px;
 }
+
+
+/*Ver mascota*/
+
+.vm-container {
+    display: block;
+    margin: 12px auto;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 40%;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.vm-datos {
+    font-size: 16;
+}
+
+.mascota-item {}
+
+.grid-custom {
+    padding: 15px;
+}
+
+.vm-title {
+    display: block;
+    margin: 12px auto;
+    text-align: center;
+    align-items: center;
+    font-size: 19px;
+}
+
+.vm-datos b {
+    text-decoration: black;
+}
+
+.vm-img {
+    background-color: transparent;
+    padding: 1px;
+    border-radius: 50px;
+    width: 60%;
+    margin: auto;
+}
+
+.backgr {
+    display: flex;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: black;
+    width: 99vmax;
+}
+
+.backgr::before {
+    filter: blur(60px);
+}
