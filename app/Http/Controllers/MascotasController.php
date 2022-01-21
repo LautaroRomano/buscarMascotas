@@ -51,8 +51,7 @@ class MascotasController extends Controller
         $mascota->fec_nac = $request->fec_nac;
 
         $fotourl = $request->file('mascotaimg')->store('public/fotos');
-        $url = Storage::url($fotourl);
-        $mascota->fotourl = $url;
+        $mascota->fotourl = Storage::url($fotourl);
 
         $mascota->save();
 
@@ -72,9 +71,23 @@ class MascotasController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'mascotaimg' => 'image|max:2048',
+        ]);
+
         $mascota = Mascota::find($id);
 
-        $mascota->update($request->all());
+        $mascota->name = $request->name;
+        $mascota->calleynum = $request->calleynum;
+        $mascota->enfermedades = $request->enfermedades;
+        $mascota->medicamentos = $request->medicamentos;
+        $mascota->fec_nac = $request->fec_nac;
+
+        $fotourl = $request->file('mascotaimg')->store('public/fotos');
+        $mascota->fotourl = Storage::url($fotourl);
+
+        $mascota->update();
+
 
         return redirect()->route('mascotas.index');
     }

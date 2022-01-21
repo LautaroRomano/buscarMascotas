@@ -34,7 +34,7 @@ Route::get('/logout', [SessionController::class, 'destroy'])
     ->name('login.destroy');
  
 //mascotas
-Route::get('/mascotas/register/{key}',[KeysController::class, 'getKey' ]);
+Route::get('/mascotas/register/{key}',[KeysController::class, 'getKey' ])->name('vermascota');
 
 Route::resource('mascotas',MascotasController::class)->middleware('auth'); 
 

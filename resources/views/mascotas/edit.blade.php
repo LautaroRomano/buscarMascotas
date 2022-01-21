@@ -7,9 +7,15 @@
 <!-- registrar mascota --> 
 <div class="block mx-auto my-12 p-8 bg-white w-1/3 border border-gray-200 rounded-lg shadow-lg">
     <h1 class="text-3xl text-center font-bold">Edita los datos de {{$mascota->name}}</h1>
-    <form class="mt-4" method="POST" action="{{ route('mascotas.update',$mascota->id)}}">
+    <form class="mt-4" method="POST" action="{{ route('mascotas.update',$mascota->id)}}" enctype="multipart/form-data">
         @csrf
         @method('put')
+
+        <input type="file" name="mascotaimg"  accept="image/*" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white">
+        @error('mascotaimg')
+            <p class="border border-red-500 rounded-md bg-red-100 w-full text-red-600 p-2 my-2">{{$message}}</p>    
+        @enderror
+
         <input type="text" name="name" placeholder="Nombre de tu mascota" value="{{ $mascota->name}}" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white">
     
         <input type="text" name="calleynum" placeholder="Calle y numero" value="{{ $mascota->calleynum}}" class="border border-gray-200 rounded-md bg-gray-200 w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white">

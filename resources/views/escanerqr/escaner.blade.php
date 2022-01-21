@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- escanear QR -->
-    <video id="preview" class="video-escaner"></video>
+    <video id="preview" class="video-escaner w-full aspect-video"></video>
     <script type="text/javascript">
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {

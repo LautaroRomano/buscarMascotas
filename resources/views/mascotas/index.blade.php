@@ -60,7 +60,11 @@
                             <i class="fas fa-pen"></i>
                         </button>
                     </a>
-
+                    <a href="{{ route('vermascota', $row->key)}}">
+                        <button class="bg-green-500 text-white px-3 py-1 rounded-sm">
+                            Ver
+                        </button>
+                    </a>
                 </td>
             </tr>
             @endforeach
