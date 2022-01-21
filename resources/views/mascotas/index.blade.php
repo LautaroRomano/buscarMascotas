@@ -10,6 +10,7 @@
     <table class="table-fixed w-full mt-10">
         <thead>
             <tr class="bg-blue-500 text-white">
+                <th class="w-1/16 py-4 ...">Foto</th>
                 <th class="w-1/16 py-4 ...">Dueño</th>
                 <th class="w-1/16 py-4 ...">Nombre</th>
                 <th class="w-1/16 py-4 ...">Calle y numero</th>
@@ -24,6 +25,9 @@
         <tbody>
             @foreach ($mascotas as $row)
             <tr>
+                <td class="p-3 text-center">
+                    <img src="{{$row->fotourl}}" class="bg-green-500 text-white px-3 py-1 rounded-sm">
+                </td>
                 <td class="p-3 text-center">{{$username}}</td>
                 <td class="p-3 text-center">{{$row->name}}</td>
                 <td class="p-3 text-center">{{$row->calleynum}}</td>

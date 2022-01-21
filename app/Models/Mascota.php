@@ -15,6 +15,7 @@ class Mascota extends Model
         'calleynum',
         'enfermedades',
         'medicamentos',
-        'fec_nac'
+        'fec_nac',
+        'fotourl',
     ];
 }

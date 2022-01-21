@@ -23,6 +23,7 @@ class Mascotas extends Migration
             $table->string('enfermedades');
             $table->string('medicamentos');
             $table->date('fec_nac');
+            $table->string('fotourl')->nullable();
 
             $table->timestamps();
         });

@@ -6,32 +6,40 @@ use Illuminate\Http\Request;
 use App\Models\Mascota;
 use App\models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MascotasController extends Controller
 {
-    
-    public function index(){
+
+    public function index()
+    {
 
         $user = auth()->user()->name;
 
-        $mascotas = Mascota::where('User_id',auth()->user()->id)->get();
+        $mascotas = Mascota::where('User_id', auth()->user()->id)->get();
 
-        return view('mascotas.index', compact('mascotas'))->with('username',$user);
+        return view('mascotas.index', compact('mascotas'))->with('username', $user);
     }
 
-    public function create($key){
-        return view('mascotas.create')->with('key', $key);  
+    public function create($key)
+    {
+        return view('mascotas.create')->with('key', $key);
     }
 
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'mascotaimg' => 'image|max:2048',
+        ]);
+
         DB::table('keys')
             ->where('key', $request->key)
             ->update([
                 'User_id' => auth()->user()->id,
                 'estado' => 0,
             ]);
-        
+
         $mascota = new Mascota();
 
         $mascota->User_id = auth()->user()->id;
@@ -39,35 +47,40 @@ class MascotasController extends Controller
         $mascota->name = $request->name;
         $mascota->calleynum = $request->calleynum;
         $mascota->enfermedades = $request->enfermedades;
-        $mascota->medicamentos = $request->medicamentos; 
-        $mascota->fec_nac = $request->fec_nac; 
-        
+        $mascota->medicamentos = $request->medicamentos;
+        $mascota->fec_nac = $request->fec_nac;
+
+        $fotourl = $request->file('mascotaimg')->store('public/fotos');
+        $url = Storage::url($fotourl);
+        $mascota->fotourl = $url;
+
         $mascota->save();
 
         return redirect()->route('mascotas.index');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $mascota = Mascota::find($id);
 
-        if($mascota->User_id == auth()->user()->id){
+        if ($mascota->User_id == auth()->user()->id) {
             return view('mascotas.edit', compact('mascota'));
         }
 
         echo "Solo puedes editar los datos de tu mascota";
-
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $mascota = Mascota::find($id);
 
         $mascota->update($request->all());
 
-        return redirect()->route('mascotas.index'); 
-
+        return redirect()->route('mascotas.index');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $mascota = Mascota::find($id);
 
         $mascota->delete();
