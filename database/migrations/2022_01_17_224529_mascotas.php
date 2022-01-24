@@ -16,14 +16,17 @@ class Mascotas extends Migration
         Schema::create('mascotas',function(Blueprint $table){
             $table->id();
 
-            $table->integer('User_id');
+            $table->integer('User_id'); 
             $table->string('key');
             $table->string('name');
             $table->string('calleynum');
-            $table->string('enfermedades');
-            $table->string('medicamentos');
+            $table->string('enfermedades')->nullable();
+            $table->string('medicamentos')->nullable();
             $table->date('fec_nac');
             $table->string('fotourl')->nullable();
+            $table->string('ubiclatitud')->nullable();
+            $table->string('ubiclongitud')->nullable();
+            $table->string('ubicfecha')->nullable();
 
             $table->timestamps();
         });

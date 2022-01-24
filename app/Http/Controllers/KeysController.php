@@ -48,7 +48,6 @@ class KeysController extends Controller
             $key->estado = 1;
             $key->save();
             
-            echo "creo $i  con $string";
             $string = "";
         }
     }

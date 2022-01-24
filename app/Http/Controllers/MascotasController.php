@@ -100,4 +100,15 @@ class MascotasController extends Controller
 
         return redirect()->route('mascotas.index');
     }
+
+    public function enviarubicacion(Request $request){
+
+        $mascota = Mascota::find($request->idmascota);
+        $mascota->ubiclatitud = $request->latitud;
+        $mascota->ubiclongitud = $request->longitud;
+        $mascota->ubicfecha = date('d-m-Y H:i:s');
+
+        $mascota->update();
+        return redirect()->route('mascotas.index');
+    }
 }

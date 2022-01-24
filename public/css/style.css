@@ -61,3 +61,24 @@
 .backgr::before {
     filter: blur(60px);
 }
+
+/*mapa css*/
+
+.map-container{
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.map-custom{
+    width: 100%;
+    height: 500px;
+}
+
+.title{
+    font-size: 19px;
+    margin: 9px;
+}
+.fecha{
+    margin-bottom: 10px;
+}

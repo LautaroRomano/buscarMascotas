@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- ver mascota -->
-<div class="backgr" style="background-image: linear-gradient(to bottom, rgba(18,42, 66, .65), rgba(18,42, 66, .65)), url( {{ $mascota->fotourl }} )">
+<div class="backgr" style="background-image: linear-gradient(to bottom, rgba(18,42, 66, .65), rgba(18,42, 66, .65)), url({{ $mascota->fotourl }})">
         <div class="vm-container">
                 <label for="" class="vm-title"><b class="vm-title">Nombre: {{ $mascota->name}}</b></label>
                 <br>
@@ -30,8 +30,29 @@
                         <label for="" class="vm-datos">telefono: <br><b class="">{{ $dueño->telefono}}</b></label>
 
                 </div>
+                <form method="POST" action="../ubicacion" id="formu">
+                        @csrf
+                        @method('post')
+                        <input type="hidden" name="longitud" id="longitud">
+                        <input type="hidden" name="latitud" id="latitud">
+                        <input type="hidden" name="iduser" id="iduser" value="{{ $dueño->id }}">
+                        <input type="hidden" name="idmascota" id="idmascota" value="{{ $mascota->id }}">
+                        <button type="submit" class="">Enviar ubicacion Actual</button>
+                </form>
         </div>
+
 </div>
+
+<div class="map-container">
+        <input type="hidden" id="ultubicacionlatitud" value="{{ $mascota->ubiclatitud }}">
+        <input type="hidden" id="ultubicacionlongitud" value="{{ $mascota->ubiclongitud }}">
+        <h3 class="title">Ultima ubicacion de tu mascota</h3>
+        <h3 class="fecha">Fecha y hora: {{$mascota->ubicfecha}}</h3>
+        <div id="map" class="map-custom"></div>
+</div>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTSEoG68aJFIVCmo4vcaKaqUrdSSkrGuE&callback=initMap"></script>
+<script src="/js/enviarUbicacion.js"></script>
 <!--fin ver mascota -->
 
 @endsection
