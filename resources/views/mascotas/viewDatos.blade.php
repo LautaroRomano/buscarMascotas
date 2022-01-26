@@ -30,15 +30,20 @@
                         <label for="" class="vm-datos">telefono: <br><b class="">{{ $dueño->telefono}}</b></label>
 
                 </div>
-                <form method="POST" action="../ubicacion" id="formu">
+                @if (auth()->check())
+                        <input type="hidden" id="userlogin" value="{{ auth()->user()->id }}">
+                @else
+                        <input type="hidden" id="userlogin" value="-1">
+                @endif
+                <form method="POST" action="./ubicacion" id="formu">
                         @csrf
                         @method('post')
                         <input type="hidden" name="longitud" id="longitud">
                         <input type="hidden" name="latitud" id="latitud">
                         <input type="hidden" name="iduser" id="iduser" value="{{ $dueño->id }}">
                         <input type="hidden" name="idmascota" id="idmascota" value="{{ $mascota->id }}">
-                        <button type="submit" class="">Enviar ubicacion Actual</button>
                 </form>
+               
         </div>
 
 </div>

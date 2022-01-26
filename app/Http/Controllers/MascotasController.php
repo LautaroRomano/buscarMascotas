@@ -109,6 +109,6 @@ class MascotasController extends Controller
         $mascota->ubicfecha = date('d-m-Y H:i:s');
 
         $mascota->update();
-        return redirect()->route('mascotas.index');
+        return redirect()->route('vermascota',$mascota->key);
     }
 }

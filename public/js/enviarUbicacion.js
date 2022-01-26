@@ -1,23 +1,24 @@
+//enviar la ubicacion
 const funcionInit = () => {
-	if (!"geolocation" in navigator) {
-		return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
-	}
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
 
-	let idWatcher = null;
+    let idWatcher = null;
 
-	const onUbicacionConcedida = ubicacion => {
-		enviarAServidor(ubicacion);
-	}
+    const onUbicacionConcedida = ubicacion => {
+        enviarAServidor(ubicacion);
+    }
 
-	const onErrorDeUbicacion = err => {
-		$console.log("Error obteniendo ubicación: " + err.message);
-	}
+    const onErrorDeUbicacion = err => {
+        $console.log("Error obteniendo ubicación: " + err.message);
+    }
 
-	const opcionesDeSolicitud = {
-		enableHighAccuracy: true, // Alta precisión
-		maximumAge: 0, // No queremos caché
-		timeout: 5000 // Esperar solo 5 segundos
-	};
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
 
     idWatcher = navigator.geolocation.watchPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
 
@@ -27,16 +28,16 @@ const funcionInit = () => {
 
 
 
-		// Debemos crear otro objeto porque el que nos mandan no se puede codificar
-		const ultubicacion = {
-			coordenadas: {
-				latitud: ubicacion.coords.latitude,
-				longitud: ubicacion.coords.longitude,
-			},
-			timestamp: ubicacion.timestamp,
+        // Debemos crear otro objeto porque el que nos mandan no se puede codificar
+        const ultubicacion = {
+            coordenadas: {
+                latitud: ubicacion.coords.latitude,
+                longitud: ubicacion.coords.longitude,
+            },
+            timestamp: ubicacion.timestamp,
             iduser: iduser,
             idmascota: idmascota,
-		};
+        };
         const long = document.getElementById('longitud');
         long.value = ubicacion.coords.longitude;
         const lat = document.getElementById('latitud');
@@ -45,37 +46,43 @@ const funcionInit = () => {
         const token = document.getElementsByName('_token');
         window.CSRF_TOKEN = token[0].value;
 
-        fetch("../ubicacion", {
-            headers: {
-                'X-CSRF-TOKEN': window.CSRF_TOKEN
-            },
-            method: "POST",
-            body: JSON.stringify(ultubicacion)
-        })
-        .then(respuesta => {
-          console.log(respuesta);
-        });
-        
+
+        formulario = document.getElementById('formu');                                      //traer el formulario para enviar la ultima ubicacion
+
+        var currentDate = new Date();                                                       //fecha y hora actual
+        var ultimaUbicacionFecha = new Date(localStorage.getItem('ubicacionEnviada'));      //ultima ubicacion enviada
+        var proxEnvioDeUbicacion = new Date(ultimaUbicacionFecha.getTime() + (10 * 60000));            //ultima ubicacion enviada sumado 10 minutos
+
+        if (currentDate > proxEnvioDeUbicacion) {                                                      //calcular el envio del formulario si pasaron mas de 10 minutos desde la ultima vez
+            formulario.submit();
+            localStorage.setItem('ubicacionEnviada', new Date());
+        }
+
+        console.log(proxEnvioDeUbicacion);
+
     };
 
 };
 
+const userlogin = document.getElementById('userlogin').value; //usuario logueado actualmente
+const userid = document.getElementById('iduser').value;       //usuario dueño de la mascota
+if(userlogin != userid){                                      //si el usuario actual no es dueño de la mascota enviar la ubicacion
+    funcionInit();
+}
 
-funcionInit();
 
-function initMap(){
+//inicializar el mapa
+function initMap() {
     const ultlong = document.getElementById('ultubicacionlongitud').value;
     const ultlat = document.getElementById('ultubicacionlatitud').value;
 
-    console.log(ultlat,ultlong)
-
-    var coord = {lat: parseFloat(ultlat) ,lng: parseFloat(ultlong)};
-    var map = new google.maps.Map(document.getElementById('map'),{
-      zoom: 15,
-      center: coord
+    var coord = { lat: parseFloat(ultlat), lng: parseFloat(ultlong) };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: coord
     });
     var marker = new google.maps.Marker({
-      position: coord,
-      map: map
+        position: coord,
+        map: map
     });
 }
